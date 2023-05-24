@@ -4,7 +4,7 @@ You need to create a Azure SQL DB + add connection string into app configuration
 
 # Azure SQL Database contents:
 
-```
+```mssql
 CREATE TABLE Employees (
 	EmployeeID int,
 	LastName varchar(200),
