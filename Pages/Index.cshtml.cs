@@ -10,6 +10,7 @@ namespace EmployeeApp.Pages
 
         public List<Employee> employees;
         public readonly IEmployeeService _employeeService;
+        public bool isBeta; 
 
         public IndexModel(IEmployeeService employeeService)
         {
@@ -18,6 +19,7 @@ namespace EmployeeApp.Pages
 
         public void OnGet()
         {
+            isBeta = _employeeService.isBeta().Result;
             employees = _employeeService.GetEmployees();
         }
     }

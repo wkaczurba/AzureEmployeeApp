@@ -1,4 +1,5 @@
 ﻿using EmployeeApp.Models;
+using Microsoft.FeatureManagement;
 using System.Data.SqlClient;
 
 namespace EmployeeApp.Services
@@ -11,10 +12,12 @@ namespace EmployeeApp.Services
         private static string db_database = "best_database";
 
         private readonly IConfiguration _configruation;
+        private readonly IFeatureManager _featureManager;
 
-        public EmployeeService(IConfiguration configruation)
+        public EmployeeService(IConfiguration configruation, IFeatureManager featureManager)
         {
             _configruation = configruation;
+            _featureManager = featureManager;
         }
 
         private SqlConnection GetConnection()
@@ -26,9 +29,18 @@ namespace EmployeeApp.Services
             //_builder.InitialCatalog = db_database;
 
             //return new SqlConnection(_builder.ConnectionString);
-            var connectionString = _configruation.GetConnectionString("SQLConnection");
+            var connectionString = _configruation["ConnectionStringAzureSql"];
 
             return new SqlConnection(connectionString);
+        }
+
+        public async Task<bool> isBeta()
+        {
+            if (await _featureManager.IsEnabledAsync("beta"))
+            {
+                return true;
+            }
+            return false;
         }
 
         public List<Employee> GetEmployees()
