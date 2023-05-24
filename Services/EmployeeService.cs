@@ -26,7 +26,7 @@ namespace EmployeeApp.Services
             //_builder.InitialCatalog = db_database;
 
             //return new SqlConnection(_builder.ConnectionString);
-            var connectionString = _configruation.GetConnectionString("SQLConnection");
+            var connectionString = _configruation["ConnectionStringAzureSql"];
 
             return new SqlConnection(connectionString);
         }

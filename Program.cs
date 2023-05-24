@@ -6,6 +6,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddTransient<IEmployeeService, EmployeeService>();
 
+var connectionString = "Endpoint=https://appcfg123.azconfig.io;Id=JUYw;Secret=Mbw1mHDS/V+515c4BJH/EwEN9ZqP5dcF5JrqE7VoiHA="; 
+builder.Host.ConfigureAppConfiguration(builder =>
+{
+    builder.AddAzureAppConfiguration(connectionString);
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
