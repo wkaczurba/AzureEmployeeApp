@@ -7,7 +7,7 @@ namespace EmployeeApp.Services
     {
         private static string db_source = "bestsqlserver.database.windows.net";
         private static string db_user = "best_admin";
-        private static string db_password = "awesome_password1";
+        private static string db_password = "***";
         private static string db_database = "best_database";
 
         private readonly IConfiguration _configruation;
